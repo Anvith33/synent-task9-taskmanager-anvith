@@ -30,6 +30,12 @@ button {
     cursor: pointer;
 }
 
+.logout-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
 button:hover {
     background-color: #0056b3;
 }
