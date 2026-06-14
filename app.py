@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import sqlite3
 
 app = Flask(__name__)
@@ -41,12 +41,27 @@ def home():
     conn = sqlite3.connect("tasks.db")
     cursor = conn.cursor()
 
-    cursor.execute("SELECT task FROM tasks")
+    cursor.execute("SELECT id, task FROM tasks")
     tasks = cursor.fetchall()
 
     conn.close()
 
     return render_template("index.html", tasks=tasks)
+@app.route("/delete/<int:id>")
+def delete_task(id):
+
+    conn = sqlite3.connect("tasks.db")
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "DELETE FROM tasks WHERE id=?",
+        (id,)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return redirect("/")
 
 if __name__ == "__main__":
     app.run(debug=True)

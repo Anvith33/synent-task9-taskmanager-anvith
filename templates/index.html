@@ -12,9 +12,14 @@
     </form>
 
     <ul>
-         {% for task in tasks %}
-    <li>{{ task[0] }}</li>
-{% endfor %}
-    </ul>
+    {% for task in tasks %}
+        <li>
+            {{ task[1] }}
+            <a href="/delete/{{ task[0] }}">
+                <button>Delete</button>
+            </a>
+        </li>
+    {% endfor %}
+</ul>
 </body>
 </html>
