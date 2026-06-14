@@ -27,9 +27,23 @@
                 Status: {{ task[3] }}
             </div>
 
-            <a href="/delete/{{ task[0] }}">
-                <button>Delete</button>
-            </a>
+          <div>
+
+    <a href="/edit/{{ task[0] }}">
+        <button>Edit</button>
+    </a>
+
+{% if task[3] == 'Pending' %}
+    <a href="/complete/{{ task[0] }}">
+        <button>Complete</button>
+    </a>
+{% endif %}
+
+    <a href="/delete/{{ task[0] }}">
+        <button>Delete</button>
+    </a>
+
+</div>
         </li>
     {% endfor %}
     </ul>

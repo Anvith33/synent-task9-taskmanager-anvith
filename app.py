@@ -49,6 +49,22 @@ def home():
     conn.close()
 
     return render_template("index.html", tasks=tasks)
+@app.route("/complete/<int:id>")
+def complete_task(id):
+
+    conn = sqlite3.connect("tasks.db")
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "UPDATE tasks SET status='Completed' WHERE id=?",
+        (id,)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return redirect("/")
+
 @app.route("/delete/<int:id>")
 def delete_task(id):
 
